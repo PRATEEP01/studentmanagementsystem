@@ -1,35 +1,49 @@
-<!--header-->
-    <div class="header" id="home">
-      <nav class="navbar navbar-default">
-        <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"> </span>
-            <span class="icon-bar"> </span>
-            <span class="icon-bar"> </span>
+ <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="navbar-brand-wrapper d-flex align-items-center">
+          <a class="navbar-brand brand-logo" href="dashboard.php">
+            <strong style="color: white;">SMS</strong>
+          </a>
+         
+        </div>
+        <?php
+         $uid= $_SESSION['sturecmsuid'];
+$sql="SELECT * from tblstudent where ID=:uid";
+
+$query = $dbh -> prepare($sql);
+$query->bindParam(':uid',$uid,PDO::PARAM_STR);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $row)
+{               ?>
+        <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
+          <h5 class="mb-0 font-weight-medium d-none d-lg-flex"><?php  echo htmlentities($row->StudentName);?> Welcome to dashboard!</h5>
+          <ul class="navbar-nav navbar-nav-right ml-auto">
+           
+        
+      
+            <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
+              <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+
+                <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> <?php  echo htmlentities($row->StudentName);?> </span></a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                <div class="dropdown-header text-center">
+                  <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+
+                  <p class="mb-1 mt-3"><?php  echo htmlentities($row->StudentName);?></p>
+                  <p class="font-weight-light text-muted mb-0"><?php  echo htmlentities($row->StudentEmail);?></p><?php $cnt=$cnt+1;}} ?>
+                </div>
+                <a class="dropdown-item" href="student-profile.php"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile</a>
+                <a class="dropdown-item" href="change-password.php"><i class="dropdown-item-icon icon-energy text-primary"></i> Setting</a>
+                <a class="dropdown-item" href="logout.php"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="icon-menu"></span>
           </button>
-          <h1><a class="navbar-brand" href="index.php">SMS</a></h1>
-          </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav navbar-right margin-top cl-effect-2">
-                <li><a href="index.php"><span data-hover="Home">Home</span></a></li>
-                <li><a href="about.php"><span data-hover="About">About</span></a></li>
-                
-                <li><a href="contact.php"><span data-hover="Contact">Contact</span></a></li>
-                <li><a href="admin/login.php"><span data-hover="Contact">Admin</span></a></li>
-                <li><a href="user/login.php"><span data-hover="Shortcodes">Student</span></a></li>
-              </ul>
-              <div class="clearfix"> </div>
-            </div><!-- /.navbar-collapse -->
-        <!-- /.container-fluid -->
-
+        </div>
       </nav>
-<!--/script-->
-       <div class="clearfix"> </div>
-</div>
-<!-- Top Navigation -->
-
-<!--header-->
